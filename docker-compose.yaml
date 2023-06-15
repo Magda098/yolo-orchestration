@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+
+  #MongoDB services
+  mongo_db:
+    container_name: db_container
+    image: mvertes/alpine-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: app1
+      MONGO_INITDB_ROOT_PASSWORD: app1
+    restart: always
+    ports:
+      - 27017:27017
+    volumes: 
+      - mongo_db:/data/db \mvertes/alpine-mongo
+    networks:
+      - yolo
+  
+  client:
+    container_name: yolo_client
+    restart: always
+    build: 
+      context : client/
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    networks:
+      - yolo
+
+  backend:
+    container_name: yolo_backend
+    restart: always
+    build: 
+      context : backend/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo_db
+    
+    networks:
+      - yolo
+
+networks:
+  yolo:
+    driver: bridge
+
+volumes:
+  mongo_db: {}
