@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-backend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: yolo-backend-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yolo-backend-deployment
+    spec:
+      containers:
+        - name: yolo-backend-deployment
+          image: magdamag/yolo-backend:v1.1.0
+          ports:
+            - containerPort: 4000
