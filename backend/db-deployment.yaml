@@ -16,4 +16,4 @@ spec:
         - name: yolo-db-deployment
           image: mvertes/alpine-mongo
           ports:
-            - containerPort: 4000
+            - containerPort: 27017
