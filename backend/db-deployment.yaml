@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-db-deployment
+spec:
+  selector:
+    matchLabels:
+      app: yolo-db-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yolo-db-deployment
+    spec:
+      containers:
+        - name: yolo-db-deployment
+          image: mvertes/alpine-mongo
+          ports:
+            - containerPort: 4000
