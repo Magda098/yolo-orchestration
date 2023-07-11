@@ -14,18 +14,7 @@ spec:
     spec:
       containers:
         - name: yolo-db-deployment
-          image: mvertes/alpine-mongo
+          image: mongo:4.0.17
           ports:
             - containerPort: 27017
-        - name: DB_VENDOR
-          value: mongo
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-credentials
-              key: user
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-credentials
-              key: password
+          
