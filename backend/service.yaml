@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yolo-backend-deployment
+  labels:
+    run: yolo-backend-deployment
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+  selector:
+    app: yolo-backend-deployment
+  type: LoadBalancer
