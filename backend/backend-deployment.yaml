@@ -17,3 +17,14 @@ spec:
           image: magdamag/yolo-backend:v1.1.0
           ports:
             - containerPort: 4000
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: yolobackend-config
+                  key: PORT
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: yolobackend-secret
+                  key: MONGODB_URI
