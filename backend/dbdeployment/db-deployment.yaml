@@ -20,7 +20,7 @@ spec:
       volumeMounts:
         - name: "mongodb-persistent-storage"
           mountPath: "/data/db"
-          
+ 
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
