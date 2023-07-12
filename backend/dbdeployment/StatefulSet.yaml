@@ -1,0 +1,41 @@
+apiVersion: "apps/v1"
+  kind: "StatefulSet"
+  metadata: 
+    name: "mongo-stateful-deployment"
+    namespace: "development"
+  spec:
+    serviceName: "mongo-db" 
+    replicas: 1
+    selector: 
+      matchLabels: 
+        app: "mongo-stateful-deployment"
+    template: 
+      metadata: 
+        labels: 
+          app: "mongo-stateful-deployment"
+      spec: 
+        containers: 
+          - 
+            name: "mongo-stateful-deployment"
+            image: "mongo"
+            imagePullPolicy: "Always"
+            env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                   name: db-secret
+                   key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                 secretKeyRef: 
+                   name: db-secret
+                   key: MONGO_INITDB_ROOT_PASSWORD
+            ports: 
+              - 
+                containerPort: 27017
+                name: "mongodb"
+                
+            volumeMounts: 
+              - 
+                name: "mongodb-persistent-storage"
+                mountPath: "/data/db"
